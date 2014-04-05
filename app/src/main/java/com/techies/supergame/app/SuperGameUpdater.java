@@ -32,9 +32,9 @@ public class SuperGameUpdater {
     public boolean update(List<Item> items, Item hero){
         updateItems(items);
 
-        if(this.currentMotionEvent == null)
+        if(this.currentMotionEvent == null) {
             return true;
-
+        }
         this.logEvent();
         this.currentMotionEvent = null;
         return true;
@@ -45,9 +45,13 @@ public class SuperGameUpdater {
             return;
         }
         Iterator<Item> iterator = items.iterator();
-        //while(iterator.hasNext()){
 
-        //}
+        // For each item to move.
+        while(iterator.hasNext()){
+            Item currentItem = iterator.next();
+            long xBorderLeft = currentItem.getX();
+            long xBorderRight = currentItem.getX() + currentItem.getLongueur();
+        }
     }
 
     private void updateHero(Item itemHero){

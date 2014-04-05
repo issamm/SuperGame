@@ -10,24 +10,24 @@ import java.util.Random;
  */
 public class Item implements Serializable{
 
-    private float X;
-    private float Y;
-    private int longueur;
-    private int largeur;
+    private long X;
+    private long Y;
+    private long longueur;
+    private long largeur;
 
-    public int getLongueur() {
+    public long getLongueur() {
         return longueur;
     }
 
-    public void setLongueur(int longueur) {
+    public void setLongueur(long longueur) {
         this.longueur = longueur;
     }
 
-    public int getLargeur() {
+    public long getLargeur() {
         return largeur;
     }
 
-    public void setLargeur(int largeur) {
+    public void setLargeur(long largeur) {
         this.largeur = largeur;
     }
 
@@ -36,19 +36,20 @@ public class Item implements Serializable{
         this.Y = 0;
     }
 
-    public float getX() {
+    public long getX() {
         return X;
     }
 
-    public void setX(float x) {
+    public void setX(long x) {
         X = x;
     }
 
-    public float getY() {
+    public long getY() {
         return Y;
     }
 
-    public void setY(float y) {
+    public void setY(long y) {
         this.Y = y;
     }
+
 }
