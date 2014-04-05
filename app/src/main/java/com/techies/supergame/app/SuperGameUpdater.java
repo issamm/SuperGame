@@ -35,14 +35,20 @@ public class SuperGameUpdater {
     }
 
     public boolean update(List<Item> items, Item hero){
-        updateItems(items, hero);
+        boolean noCollision = updateItems(items, hero);
         updateHero(hero);
         return true;
     }
 
-    private void updateItems(List<Item> items, Item hero){
+    /**
+     * Returns false if collision between items and hero.
+     * @param items
+     * @param hero
+     * @return False if collision, true otherwise
+     */
+    private boolean updateItems(List<Item> items, Item hero){
         if(items == null || items.size() < 1){
-            return;
+            return true;
         }
         Iterator<Item> iterator = items.iterator();
 
@@ -65,8 +71,34 @@ public class SuperGameUpdater {
             /*
              * Collision between Hero and item ?
              */
-
+            boolean collision = collision(currentItem, hero);
+            if(collision){
+                return false;
+            }
         }
+        return true;
+    }
+
+    private boolean collision(Item item, Item hero){
+        int xBorderLeft = item.getX();
+        int xBorderRight = item.getX() + item.getLongueur();
+        int yBorderTop = item.getY();
+        int yBorderBottom = item.getY() + item.getLargeur();
+
+        int xHeroLeft = hero.getX();
+        int xHeroRight = hero.getX() + hero.getLongueur();
+        int yHeroTop = hero.getY();
+        int yHeroBottom = hero.getY() + hero.getLargeur();
+
+        boolean xCollision = xBorderLeft < xHeroRight && xBorderLeft > xBorderLeft;
+        boolean yCollisionBottom = yBorderBottom < yHeroBottom && yBorderBottom > yHeroTop;
+        boolean yCollisionTop = yBorderTop < yHeroBottom && yBorderTop > yHeroTop;
+        boolean yCollision = yCollisionBottom || yCollisionTop;
+
+        if(xCollision && yCollision){
+            return true;
+        }
+        return false;
     }
 
     private void updateHero(Item itemHero){
