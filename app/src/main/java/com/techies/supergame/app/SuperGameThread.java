@@ -18,11 +18,19 @@ public class SuperGameThread extends Thread{
     private SurfaceHolder surfaceHolder;
     private SuperGameSurfaceView gamePanel;
 
+    private int _screenHeight = 0;
+    private int _screenWidth = 0;
+    private long _lastGeneration = 0;
+    private int _minTime = 2000;
+    private int _maxTime = 5000;
+
     private boolean running;
     private final static int 	MAX_FPS = 50;
     private final static int	MAX_FRAME_SKIPS = 5;
     private final static int	FRAME_PERIOD = 1000 / MAX_FPS;
-    private SuperGameUpdater gameUpdater;
+
+    private SuperGameUpdater _gameUpdater;
+    private ItemGenerator _itemGenerator;
 
     ArrayList<Item> _obstacles;
     Item _hero;
@@ -33,11 +41,17 @@ public class SuperGameThread extends Thread{
         this.gamePanel = gamePanel;
         this._obstacles = new ArrayList<Item>();
         this._hero = new Item();
-        // TODO : screen parameters
-        long screenHeight = 0l;
-        long screenWidth = 0l;
-        this.gameUpdater = new SuperGameUpdater(screenHeight, screenWidth);
+
     }
+
+    private void init(){
+        this._screenHeight = this.gamePanel.getHeight();
+        this._screenWidth = this.gamePanel.getWidth();
+        this._gameUpdater = new SuperGameUpdater(this._screenHeight, this._screenWidth);
+        this._itemGenerator = new ItemGenerator(this._minTime,this._maxTime,
+                this._screenWidth, this._screenHeight);
+    }
+
 
     @Override
     public void run() {
@@ -48,6 +62,8 @@ public class SuperGameThread extends Thread{
         int sleepTime = 0;
         int framesSkipped;
 
+        init();
+
         while (running) {
             canvas = null;
             try {
@@ -56,7 +72,20 @@ public class SuperGameThread extends Thread{
                     beginTime = System.currentTimeMillis();
                     framesSkipped = 0;
 
-                    running = gameUpdater.update(_obstacles, _hero);
+                    this._lastGeneration++;
+                    //Generating Item
+                    Item item = this._itemGenerator.generate(this._lastGeneration);
+                    if (item != null){
+                        this._lastGeneration = System.currentTimeMillis();
+                        this._obstacles.add(item);
+                    }
+
+                    //Updating Game
+                    running = this._gameUpdater.update(_obstacles, _hero);
+
+                    //rendering game
+                    //rendering section
+
 
                     timeDiff = System.currentTimeMillis() - beginTime;
                     sleepTime = (int)(FRAME_PERIOD - timeDiff);
@@ -67,7 +96,7 @@ public class SuperGameThread extends Thread{
                     }
 
                     while (sleepTime < 0 && framesSkipped < MAX_FRAME_SKIPS) {
-                        running = gameUpdater.update(_obstacles, _hero);
+                        running = this._gameUpdater.update(_obstacles, _hero);
                         sleepTime += FRAME_PERIOD;
                         framesSkipped++;
                     }
@@ -81,7 +110,7 @@ public class SuperGameThread extends Thread{
     }
 
     public SuperGameUpdater getGameUpdater() {
-        return gameUpdater;
+        return this._gameUpdater;
     }
 
     public void setRunning(boolean running) {

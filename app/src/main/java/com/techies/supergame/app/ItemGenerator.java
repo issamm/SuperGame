@@ -7,9 +7,6 @@ import java.util.Random;
  */
 public class ItemGenerator {
 
-    //seconds since last generation
-    private int _lastGeneration;
-
     //seconds max before generation
     private int _maxTime;
     //seconds min before generation
@@ -18,25 +15,27 @@ public class ItemGenerator {
     private int _screenMaxX;
     private int _screenMaxY;
 
-    public ItemGenerator(int lastGeneration, int maxTime, int minTime,
+    public ItemGenerator(int minTime, int maxTime,
                          int screenMaxX, int screenMaxY){
-        this._lastGeneration = lastGeneration;
+        this._minTime = minTime;
         this._maxTime = maxTime;
         this._screenMaxX = screenMaxX;
         this._screenMaxY = screenMaxY;
     }
 
-    public Item generate(){
-        if (this._lastGeneration > this._maxTime)
+    public Item generate(long lastGeneration){
+        long currentTime = System.currentTimeMillis();
+
+        if (currentTime - lastGeneration > this._maxTime)
             return this.getItem();
 
-        if (this._lastGeneration < this._minTime)
+        if (currentTime - lastGeneration < this._minTime)
             return null;
 
         Random r=new Random();
         int time= r.nextInt(this._maxTime);
 
-        if (this._lastGeneration > time)
+        if (currentTime - lastGeneration > time)
             return this.getItem();
 
         return null;
