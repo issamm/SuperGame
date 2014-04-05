@@ -14,6 +14,15 @@ public class Item implements Serializable{
     private int Y;
     private int longueur;
     private int largeur;
+    private int rotate;
+
+    public int getRotate() {
+        return rotate;
+    }
+
+    public void setRotate(int rotate) {
+        this.rotate = rotate;
+    }
 
     public int getLongueur() {
         return longueur;
