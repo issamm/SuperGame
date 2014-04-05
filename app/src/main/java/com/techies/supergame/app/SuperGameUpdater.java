@@ -11,42 +11,47 @@ import com.techies.supergame.app.Item;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * Created by elyassbenhdech on 04/04/2014.
  */
 public class SuperGameUpdater {
+
+    private final static int DEFAULT_HERO_GOING_DOWN_SPEED = 10;
+    private final static int DEFAULT_ITEM_GOING_LEFT_SPEED = 5;
+
     private static final String TAG = SuperGameUpdater.class.getSimpleName();
     private MotionEvent currentMotionEvent;
 
-    ArrayList<Item> _obstacles;
-    Item _hero;
-
-    public SuperGameUpdater(ArrayList<Item> obstacles, Item hero){
+    public SuperGameUpdater(long screenHeight, long screenWidth){
         this.currentMotionEvent = null;
-        this._obstacles = obstacles;
-        this._hero = hero;
     }
 
-    public boolean update(){
+    public boolean update(List<Item> items, Item hero){
+        updateItems(items);
+
         if(this.currentMotionEvent == null)
             return true;
 
-        this.addItem();
         this.logEvent();
         this.currentMotionEvent = null;
         return true;
     }
 
-    public void render(Canvas canvas){
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.FILL);
-
-        for(Item item : this._obstacles){
-            canvas.drawCircle(item.getX(), item.getY(), 50, paint);
+    private void updateItems(List<Item> items){
+        if(items == null || items.size() < 1){
+            return;
         }
+        Iterator<Item> iterator = items.iterator();
+        //while(iterator.hasNext()){
+
+        //}
+    }
+
+    private void updateHero(Item itemHero){
+        // TODO : update hero.
     }
 
     private void logEvent(){
@@ -57,13 +62,6 @@ public class SuperGameUpdater {
         }
     }
 
-    private void addItem(){
-        Item item = new Item();
-        item.setX(this.currentMotionEvent.getX());
-        item.setY(this.currentMotionEvent.getY());
-        this._obstacles.add(item);
-    }
-
     public MotionEvent getCurrentMotionEvent() {
         return currentMotionEvent;
     }
@@ -71,4 +69,5 @@ public class SuperGameUpdater {
     public void setCurrentMotionEvent(MotionEvent currentMotionEvent) {
         this.currentMotionEvent = currentMotionEvent;
     }
+
 }
