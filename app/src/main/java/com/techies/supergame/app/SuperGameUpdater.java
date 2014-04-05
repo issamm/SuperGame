@@ -33,9 +33,10 @@ public class SuperGameUpdater {
         this.screenWidth = screenWidth;
     }
 
-    public void update(List<Item> items, Item hero){
+    public boolean update(List<Item> items, Item hero){
         updateItems(items);
         updateHero(hero);
+        return true;
     }
 
     private void updateItems(List<Item> items){
