@@ -1,9 +1,6 @@
 package com.techies.supergame.app;
 
-import android.graphics.Color;
-
 import java.io.Serializable;
-import java.util.Random;
 
 /**
  * Created by elyassbenhdech on 04/04/2014.

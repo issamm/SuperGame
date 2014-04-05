@@ -50,8 +50,8 @@ public class ItemGenerator {
         item.setX(this._screenMaxX + 10);
         item.setY(y);
 
-        item.setLargeur(88);
-        item.setLongueur(100);
+        item.setLargeur(50);
+        item.setLongueur(50);
 
         item.setRotate(0);
 
