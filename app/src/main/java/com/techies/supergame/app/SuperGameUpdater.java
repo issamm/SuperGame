@@ -90,14 +90,17 @@ public class SuperGameUpdater {
         int yHeroTop = hero.getY();
         int yHeroBottom = hero.getY() + hero.getLargeur();
 
-        boolean xCollision = xBorderLeft < xHeroRight && xBorderLeft > xBorderLeft;
-        boolean yCollisionBottom = yBorderBottom < yHeroBottom && yBorderBottom > yHeroTop;
-        boolean yCollisionTop = yBorderTop < yHeroBottom && yBorderTop > yHeroTop;
-        boolean yCollision = yCollisionBottom || yCollisionTop;
+        boolean xCollision = xBorderLeft <= xHeroRight && xBorderLeft >= xHeroLeft;
+        boolean yCollisionBottom = yBorderBottom <= yHeroBottom && yBorderBottom >= yHeroTop;
+        boolean yCollisionTop = yBorderTop <= yHeroBottom && yBorderTop >= yHeroTop;
+        boolean yCollisionMiddle = (yHeroTop <= yBorderBottom && yHeroTop >= yBorderTop)
+                                || (yHeroBottom >= yBorderTop && yHeroBottom <= yBorderBottom);
+        boolean yCollision = yCollisionBottom || yCollisionTop || yCollisionMiddle;
 
         if(xCollision && yCollision){
             return true;
         }
+
         return false;
     }
 
