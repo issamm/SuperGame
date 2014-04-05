@@ -53,6 +53,8 @@ public class ItemGenerator {
         item.setLargeur(60);
         item.setLongueur(60);
 
+        item.setRotate(0);
+
         return item;
     }
 }
