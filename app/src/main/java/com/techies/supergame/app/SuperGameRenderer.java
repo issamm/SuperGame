@@ -32,9 +32,9 @@ public class SuperGameRenderer {
         heroPaint.setStyle(Paint.Style.FILL);
 
         for(Item item : obstacles){
-            canvas.drawCircle(item.getX(), item.getY(), 60, obstaclePaint);
+            canvas.drawCircle(item.getX()+item.getLongueur()/2, item.getY()-item.getLargeur()/2, item.getLargeur(), obstaclePaint);
         }
 
-        canvas.drawCircle(hero.getX(), hero.getY(), 30, heroPaint);
+        canvas.drawCircle(hero.getX()+hero.getLongueur()/2, hero.getY()-hero.getLargeur()/2, hero.getLargeur(), heroPaint);
     }
 }
