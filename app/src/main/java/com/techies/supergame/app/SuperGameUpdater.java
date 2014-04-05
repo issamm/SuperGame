@@ -20,11 +20,13 @@ public class SuperGameUpdater {
     private static final String TAG = SuperGameUpdater.class.getSimpleName();
     private MotionEvent currentMotionEvent;
 
-    ArrayList<Item> itemArrayList;
+    ArrayList<Item> _obstacles;
+    Item _hero;
 
-    public SuperGameUpdater(){
+    public SuperGameUpdater(ArrayList<Item> obstacles, Item hero){
         this.currentMotionEvent = null;
-        this.itemArrayList = new ArrayList<Item>();
+        this._obstacles = obstacles;
+        this._hero = hero;
     }
 
     public boolean update(){
@@ -42,7 +44,7 @@ public class SuperGameUpdater {
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.FILL);
 
-        for(Item item : this.itemArrayList){
+        for(Item item : this._obstacles){
             canvas.drawCircle(item.getX(), item.getY(), 50, paint);
         }
     }
@@ -59,7 +61,7 @@ public class SuperGameUpdater {
         Item item = new Item();
         item.setX(this.currentMotionEvent.getX());
         item.setY(this.currentMotionEvent.getY());
-        this.itemArrayList.add(item);
+        this._obstacles.add(item);
     }
 
     public MotionEvent getCurrentMotionEvent() {

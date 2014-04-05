@@ -7,6 +7,8 @@ import android.view.SurfaceHolder;
 import com.techies.supergame.app.SuperGameSurfaceView;
 import com.techies.supergame.app.SuperGameUpdater;
 
+import java.util.ArrayList;
+
 /**
  * Created by elyassbenhdech on 01/04/2014.
  */
@@ -22,11 +24,16 @@ public class SuperGameThread extends Thread{
     private final static int	FRAME_PERIOD = 1000 / MAX_FPS;
     private SuperGameUpdater gameUpdater;
 
+    ArrayList<Item> _obstacles;
+    Item _hero;
+
     public SuperGameThread(SurfaceHolder surfaceHolder, SuperGameSurfaceView gamePanel) {
         super();
         this.surfaceHolder = surfaceHolder;
         this.gamePanel = gamePanel;
-        this.gameUpdater = new SuperGameUpdater();
+        this._obstacles = new ArrayList<Item>();
+        this._hero = new Item();
+        this.gameUpdater = new SuperGameUpdater(this._obstacles, this._hero);
     }
 
     @Override
