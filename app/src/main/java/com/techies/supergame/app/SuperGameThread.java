@@ -33,7 +33,10 @@ public class SuperGameThread extends Thread{
         this.gamePanel = gamePanel;
         this._obstacles = new ArrayList<Item>();
         this._hero = new Item();
-        this.gameUpdater = new SuperGameUpdater(this._obstacles, this._hero);
+        // TODO : screen parameters
+        long screenHeight = 0l;
+        long screenWidth = 0l;
+        this.gameUpdater = new SuperGameUpdater(screenHeight, screenWidth);
     }
 
     @Override
@@ -53,8 +56,7 @@ public class SuperGameThread extends Thread{
                     beginTime = System.currentTimeMillis();
                     framesSkipped = 0;
 
-                    running = gameUpdater.update();
-                    gameUpdater.render(canvas);
+                    running = gameUpdater.update(_obstacles, _hero);
 
                     timeDiff = System.currentTimeMillis() - beginTime;
                     sleepTime = (int)(FRAME_PERIOD - timeDiff);
@@ -65,7 +67,7 @@ public class SuperGameThread extends Thread{
                     }
 
                     while (sleepTime < 0 && framesSkipped < MAX_FRAME_SKIPS) {
-                        running = gameUpdater.update();
+                        running = gameUpdater.update(_obstacles, _hero);
                         sleepTime += FRAME_PERIOD;
                         framesSkipped++;
                     }
