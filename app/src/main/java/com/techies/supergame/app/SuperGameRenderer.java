@@ -27,10 +27,7 @@ public class SuperGameRenderer {
         if (canvas== null)
             return;
 
-        Paint clearPaint = new Paint();
-        clearPaint.setColor(Color.BLACK);
-        clearPaint.setStyle(Paint.Style.FILL);
-        canvas.drawRect(0, 0, this.screenX, this.screenY, clearPaint);
+        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
 
         Paint obstaclePaint = new Paint();
         obstaclePaint.setColor(Color.RED);
