@@ -24,9 +24,13 @@ public class SuperGameUpdater {
 
     private static final String TAG = SuperGameUpdater.class.getSimpleName();
     private MotionEvent currentMotionEvent;
+    private final int screenHeight;
+    private final int screenWidth;
 
-    public SuperGameUpdater(long screenHeight, long screenWidth){
+    public SuperGameUpdater(int screenHeight, int screenWidth){
         this.currentMotionEvent = null;
+        this.screenHeight = screenHeight;
+        this.screenWidth = screenWidth;
     }
 
     public boolean update(List<Item> items, Item hero){
@@ -49,13 +53,30 @@ public class SuperGameUpdater {
         // For each item to move.
         while(iterator.hasNext()){
             Item currentItem = iterator.next();
-            long xBorderLeft = currentItem.getX();
-            long xBorderRight = currentItem.getX() + currentItem.getLongueur();
+            int xBorderLeft = currentItem.getX();
+            int xBorderRight = currentItem.getX() + currentItem.getLongueur();
+            int yBorderTop = currentItem.getY();
+            int yBorderBottom = currentItem.getY() + currentItem.getLargeur();
+            // Do we have to remove the item ?
+            if(xBorderRight < 0){
+                iterator.remove();
+            }
+            currentItem.setX(xBorderLeft - DEFAULT_ITEM_GOING_LEFT_SPEED);
         }
     }
 
     private void updateHero(Item itemHero){
-        // TODO : update hero.
+        int xBorderLeft = itemHero.getX();
+        int xBorderRight = itemHero.getX() + itemHero.getLongueur();
+        int yBorderTop = itemHero.getY();
+        int yBorderBottom = itemHero.getY() + itemHero.getLargeur();
+
+        boolean isPassive = currentMotionEvent == null;
+        if(isPassive) {
+            itemHero.setY(yBorderTop + DEFAULT_HERO_GOING_DOWN_SPEED);
+        }else{
+            itemHero.setY(yBorderTop - DEFAULT_HERO_GOING_DOWN_SPEED);
+        }
     }
 
     private void logEvent(){
