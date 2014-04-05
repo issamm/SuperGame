@@ -55,8 +55,8 @@ public class SuperGameThread extends Thread{
 
         this._hero.setX(420);
         this._hero.setY(this._screenHeight);
-        this._hero.setLargeur(32);
-        this._hero.setLongueur(32);
+        this._hero.setLargeur(100);
+        this._hero.setLongueur(51);
     }
 
 
