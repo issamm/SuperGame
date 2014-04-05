@@ -73,7 +73,8 @@ public class SuperGameUpdater {
             return;
         }
         int actionMasked = currentMotionEvent.getActionMasked();
-        boolean moveHero = actionMasked == MotionEvent.ACTION_MOVE;
+        boolean moveHero = actionMasked == MotionEvent.ACTION_DOWN
+                        || actionMasked == MotionEvent.ACTION_MOVE;
         if(moveHero) {
             itemHero.setY(yBorderTop - DEFAULT_HERO_GOING_DOWN_SPEED);
         }
