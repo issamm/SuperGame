@@ -35,20 +35,20 @@ public class SuperGameUpdater {
     }
 
     public boolean update(List<Item> items, Item hero){
-        boolean noCollision = updateItems(items, hero);
         updateHero(hero);
-        return true;
+        boolean collision = updateItems(items, hero);
+        return collision;
     }
 
     /**
-     * Returns false if collision between items and hero.
+     * Returns True if collision between items and hero.
      * @param items
      * @param hero
-     * @return False if collision, true otherwise
+     * @return True if collision, false otherwise
      */
     private boolean updateItems(List<Item> items, Item hero){
         if(items == null || items.size() < 1){
-            return true;
+            return false;
         }
         Iterator<Item> iterator = items.iterator();
 
@@ -73,10 +73,10 @@ public class SuperGameUpdater {
              */
             boolean collision = collision(currentItem, hero);
             if(collision){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private boolean collision(Item item, Item hero){
