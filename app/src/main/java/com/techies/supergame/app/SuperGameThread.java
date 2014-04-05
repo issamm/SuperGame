@@ -34,8 +34,8 @@ public class SuperGameThread extends Thread{
         this._obstacles = new ArrayList<Item>();
         this._hero = new Item();
         // TODO : screen parameters
-        long screenHeight = 0l;
-        long screenWidth = 0l;
+        int screenHeight = 0;
+        int screenWidth = 0;
         this.gameUpdater = new SuperGameUpdater(screenHeight, screenWidth);
     }
 
