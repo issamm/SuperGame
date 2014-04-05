@@ -29,7 +29,7 @@ public class SuperGameRenderer {
 
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
 
-        Bitmap alien = BitmapFactory.decodeResource(this._superGameSurfaceView.getResources(), R.drawable.alien);
+        Bitmap alien = BitmapFactory.decodeResource(this._superGameSurfaceView.getResources(), R.drawable.ufo);
         Bitmap asteroid = BitmapFactory.decodeResource(this._superGameSurfaceView.getResources(), R.drawable.asteroid);
 
         Paint obstaclePaint = new Paint();
