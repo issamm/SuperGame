@@ -3,6 +3,8 @@ package com.techies.supergame.app;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,7 +23,15 @@ public class SuperGameRenderer {
         this._superGameSurfaceView = superGameSurfaceView;
     }
 
-    public void render(ArrayList<Item> obstacles, Item hero){
+    public void render(Canvas canvas, ArrayList<Item> obstacles, Item hero){
+        if (canvas== null)
+            return;
+
+        Paint clearPaint = new Paint();
+        clearPaint.setColor(Color.BLACK);
+        clearPaint.setStyle(Paint.Style.FILL);
+        canvas.drawRect(0, 0, this.screenX, this.screenY, clearPaint);
+
         Paint obstaclePaint = new Paint();
         obstaclePaint.setColor(Color.RED);
         obstaclePaint.setStyle(Paint.Style.FILL);
@@ -29,8 +39,6 @@ public class SuperGameRenderer {
         Paint heroPaint = new Paint();
         heroPaint.setColor(Color.BLUE);
         heroPaint.setStyle(Paint.Style.FILL);
-
-        Canvas canvas = this._superGameSurfaceView.getHolder().lockCanvas();
 
         for(Item item : obstacles){
             canvas.drawCircle(item.getX(), item.getY(), 60, obstaclePaint);
