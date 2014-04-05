@@ -33,15 +33,9 @@ public class SuperGameUpdater {
         this.screenWidth = screenWidth;
     }
 
-    public boolean update(List<Item> items, Item hero){
+    public void update(List<Item> items, Item hero){
         updateItems(items);
-
-        if(this.currentMotionEvent == null) {
-            return true;
-        }
-        this.logEvent();
-        this.currentMotionEvent = null;
-        return true;
+        updateHero(hero);
     }
 
     private void updateItems(List<Item> items){
@@ -58,7 +52,8 @@ public class SuperGameUpdater {
             int yBorderTop = currentItem.getY();
             int yBorderBottom = currentItem.getY() + currentItem.getLargeur();
             // Do we have to remove the item ?
-            if(xBorderRight < 0){
+            boolean removeItem = xBorderRight < 0;
+            if(removeItem){
                 iterator.remove();
             }
             currentItem.setX(xBorderLeft - DEFAULT_ITEM_GOING_LEFT_SPEED);
@@ -66,15 +61,19 @@ public class SuperGameUpdater {
     }
 
     private void updateHero(Item itemHero){
-        int xBorderLeft = itemHero.getX();
-        int xBorderRight = itemHero.getX() + itemHero.getLongueur();
+        if(itemHero == null){
+            return;
+        }
         int yBorderTop = itemHero.getY();
-        int yBorderBottom = itemHero.getY() + itemHero.getLargeur();
 
         boolean isPassive = currentMotionEvent == null;
         if(isPassive) {
             itemHero.setY(yBorderTop + DEFAULT_HERO_GOING_DOWN_SPEED);
-        }else{
+            return;
+        }
+        int actionMasked = currentMotionEvent.getActionMasked();
+        boolean moveHero = actionMasked == MotionEvent.ACTION_MOVE;
+        if(moveHero) {
             itemHero.setY(yBorderTop - DEFAULT_HERO_GOING_DOWN_SPEED);
         }
     }
