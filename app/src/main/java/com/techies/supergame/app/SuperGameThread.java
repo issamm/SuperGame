@@ -51,7 +51,7 @@ public class SuperGameThread extends Thread{
         this._gameUpdater = new SuperGameUpdater(this._screenHeight, this._screenWidth);
         this._itemGenerator = new ItemGenerator(this._minTime,this._maxTime,
                 this._screenWidth, this._screenHeight);
-        this._superGameRenderer = new SuperGameRenderer(this._superGameSurfaceView);
+        this._superGameRenderer = new SuperGameRenderer();
 
         this._hero.setX(420);
         this._hero.setY(this._screenHeight);

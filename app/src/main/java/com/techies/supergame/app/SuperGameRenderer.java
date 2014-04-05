@@ -14,13 +14,7 @@ import java.util.Iterator;
  */
 public class SuperGameRenderer {
 
-    private int screenX;
-    private int screenY;
-
-    private SuperGameSurfaceView _superGameSurfaceView;
-
-    public SuperGameRenderer(SuperGameSurfaceView superGameSurfaceView){
-        this._superGameSurfaceView = superGameSurfaceView;
+    public SuperGameRenderer(){
     }
 
     public void render(Canvas canvas, ArrayList<Item> obstacles, Item hero){
