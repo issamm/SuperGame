@@ -37,7 +37,7 @@ public class SuperGameUpdater {
     public boolean update(List<Item> items, Item hero){
         updateHero(hero);
         boolean collision = updateItems(items, hero);
-        return collision;
+        return !collision;
     }
 
     /**
