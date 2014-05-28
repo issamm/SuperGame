@@ -1,4 +1,7 @@
 .gradle
+.idea/gradle.xml
+SuperGame.iml
+app/app.iml
 /local.properties
 /.idea/workspace.xml
 .DS_Store
