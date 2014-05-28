@@ -42,7 +42,6 @@ public class SuperGameThread extends Thread{
         this._superGameSurfaceView = gamePanel;
         this._obstacles = new ArrayList<Item>();
         this._hero = new Item();
-
     }
 
     private void init(){
@@ -54,7 +53,7 @@ public class SuperGameThread extends Thread{
         this._superGameRenderer = new SuperGameRenderer(this._superGameSurfaceView);
 
         this._hero.setX(420);
-        this._hero.setY(this._screenHeight);
+        this._hero.setY(this._screenHeight-(50*2));
         this._hero.setLargeur(50);
         this._hero.setLongueur(50);
     }
@@ -91,7 +90,7 @@ public class SuperGameThread extends Thread{
                     running = this._gameUpdater.update(_obstacles, _hero);
 
                     //rendering game
-                    this._superGameRenderer.render(canvas, this._obstacles, this._hero);
+                    this._superGameRenderer.render(canvas, this._obstacles, this._hero, this._stars);
 
 
                     timeDiff = System.currentTimeMillis() - beginTime;

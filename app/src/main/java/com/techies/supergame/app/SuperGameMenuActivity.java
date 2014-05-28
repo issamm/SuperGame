@@ -51,6 +51,8 @@ public class SuperGameMenuActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        super.setTitle("SuperGame");
+
         setContentView(R.layout.activity_menu);
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);

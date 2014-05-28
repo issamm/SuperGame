@@ -126,23 +126,33 @@ public class SuperGameUpdater {
          */
         if(isPassive) {
             // If going out the screen (bottom).
-            if(yBorderBottom > screenHeight){
-                itemHero.setY(screenHeight - itemHero.getLargeur());
-            }else {
-                // Setting the good position.
-                itemHero.setY(yBorderTop + DEFAULT_HERO_GOING_DOWN_SPEED);
+            if (yBorderBottom == screenHeight - (itemHero.getLargeur())) {
+                itemHero.setY(screenHeight - itemHero.getLargeur()*2);
+            } else {
+                if (yBorderBottom <= screenHeight - (itemHero.getLargeur())) {
+                    itemHero.setY(yBorderTop + DEFAULT_HERO_GOING_UP_SPEED);
+                } else {
+                    itemHero.setY(screenHeight - itemHero.getLargeur() * 2);
+                }
             }
             return;
         }
-
+        else {
+            if (yBorderTop <= DEFAULT_HERO_GOING_UP_SPEED) {
         /*
          * Action event : DOWN or MOVE, moving the Hero up.
          */
-        if(yBorderTop < 0) {
-            itemHero.setY(0);
-        } else{
-            itemHero.setY(yBorderTop - DEFAULT_HERO_GOING_UP_SPEED);
+
+                itemHero.setY(0);
+            } else {
+                if (yBorderBottom <= screenHeight - (itemHero.getLargeur())) {
+                    itemHero.setY(yBorderTop - DEFAULT_HERO_GOING_UP_SPEED);
+                } else {
+                    itemHero.setY(screenHeight - itemHero.getLargeur() * 2);
+                }
+            }
         }
+
     }
 
     private void logEvent(){
