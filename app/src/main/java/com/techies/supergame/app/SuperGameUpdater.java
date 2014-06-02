@@ -90,18 +90,28 @@ public class SuperGameUpdater {
         int yHeroTop = hero.getY();
         int yHeroBottom = hero.getY() + hero.getLargeur();
 
-        boolean xCollision = xBorderLeft <= xHeroRight && xBorderLeft >= xHeroLeft;
-        boolean yCollisionBottom = yBorderBottom <= yHeroBottom && yBorderBottom >= yHeroTop;
-        boolean yCollisionTop = yBorderTop <= yHeroBottom && yBorderTop >= yHeroTop;
-        boolean yCollisionMiddle = (yHeroTop <= yBorderBottom && yHeroTop >= yBorderTop)
-                                || (yHeroBottom >= yBorderTop && yHeroBottom <= yBorderBottom);
-        boolean yCollision = yCollisionBottom || yCollisionTop || yCollisionMiddle;
-
-        if(xCollision && yCollision){
-            return true;
+        boolean isCollision = false;
+        // collision bottom right
+        if (xHeroRight >= xBorderLeft && xHeroRight <= xBorderRight && yHeroBottom >= yBorderTop && yHeroBottom <= yBorderBottom) {
+            isCollision = true;
+        }
+        else
+        // collision top right
+        if (xHeroRight >= xBorderLeft && xHeroRight <= xBorderRight && yHeroTop >= yBorderTop && yHeroTop <= yBorderBottom) {
+            isCollision = true;
+        }
+        else
+        // collision bottom left
+        if (xHeroLeft >= xBorderLeft && xHeroLeft <= xBorderRight && yHeroBottom >= yBorderTop && yHeroBottom <= yBorderBottom) {
+            isCollision = true;
+        }
+        else
+        // collision top left
+        if (xHeroLeft >= xBorderLeft && xHeroLeft <= xBorderRight && yHeroTop >= yBorderTop && yHeroTop <= yBorderBottom) {
+            isCollision = true;
         }
 
-        return false;
+        return isCollision;
     }
 
     private void updateHero(Item itemHero){

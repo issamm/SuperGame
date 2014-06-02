@@ -90,7 +90,7 @@ public class SuperGameThread extends Thread{
                     running = this._gameUpdater.update(_obstacles, _hero);
 
                     //rendering game
-                    this._superGameRenderer.render(canvas, this._obstacles, this._hero, this._stars);
+                    this._superGameRenderer.render(canvas, this._obstacles, this._hero  );
 
 
                     timeDiff = System.currentTimeMillis() - beginTime;
